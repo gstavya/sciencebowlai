@@ -4,6 +4,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 import streamlit as st
 st.title("Science Bowl Question Generator")
 
