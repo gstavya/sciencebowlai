@@ -3,4 +3,3 @@ openai
 langchain-core
 python-dotenv
 streamlit
-os
