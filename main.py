@@ -35,13 +35,7 @@ def select_topic():
     else:
         topic = random.choice(subtopics[category])
     return category, topic
-
-from sentence_transformers import SentenceTransformer
-import faiss
-import numpy as np
-
-from sentence_transformers import SentenceTransformer
-import faiss
+    
 import numpy as np
 
 chem_text = [
