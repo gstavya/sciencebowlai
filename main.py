@@ -2803,145 +2803,144 @@ energy_prompt = f"This is an energy question. In energy questions, you will brie
 import time
 
 if st.button("Generate Question"):
-    while True:
-        category, topic = select_topic()
+    category, topic = select_topic()
+    index = 0
+    if(category=="Energy"):
+        index = y
+    else:
+        for i in range(len(subtopics[category])):
+            if(subtopics[category][i]==(topic)):
+                index = i
+                break
+    ans = []
+    if(category=="Chemistry"):
+        ans = chem_text
+    elif(category=="Physics"):
+        ans = phys_text
+    elif(category=="Biology"):
+        ans = bio_text
+    elif(category=="Math"):
+        ans.append(subtopics[category][index])
         index = 0
-        if(category=="Energy"):
-            index = y
-        else:
-            for i in range(len(subtopics[category])):
-                if(subtopics[category][i]==(topic)):
-                    index = i
-                    break
-        ans = []
-        if(category=="Chemistry"):
-            ans = chem_text
-        elif(category=="Physics"):
+    elif(category=="Energy"):
+        if(x==0):
             ans = phys_text
-        elif(category=="Biology"):
+        elif(x==1):
+            ans = chem_text
+        else:
             ans = bio_text
+    difficulty = 3
+    def generate_science_bowl_question():
+        retrieved_text = ans[index]
+        prompt = ""
+        if(category=="Energy"):
+            prompt += energy_prompt
         elif(category=="Math"):
-            ans.append(subtopics[category][index])
-            index = 0
-        elif(category=="Energy"):
-            if(x==0):
-                ans = phys_text
-            elif(x==1):
-                ans = chem_text
-            else:
-                ans = bio_text
-        difficulty = 3
-        def generate_science_bowl_question():
-            retrieved_text = ans[index]
-            prompt = ""
-            if(category=="Energy"):
-                prompt += energy_prompt
-            elif(category=="Math"):
-                prompt += math_prompt
+            prompt += math_prompt
 
-            if(difficulty==0):
-                prompt += "These questions are meant to be relatively easy and maybe a sentence or two. They should be straightforward and for middle school students."
-            elif(difficulty==1):
-                prompt += "These questions are meant to be relatively medium and at least a couple of sentences. They should be logical and not too complex yet not simple and for advanced high school students."
-            elif(difficulty==2):
-                prompt += "These questions are meant to be difficult and relatively lengthy. They should require high-level thinking and reference difficult terms; these are meant for college-level students."
-            elif(difficulty==3):
-                prompt += "These questions are extremely difficult and pretty lengthy. They cannot just be rote memorization and should require a significant degree of high-level thinking and intelligence. These are meant for highly advanced graduate-level students and PhDs in a field."
-            
-            prompt +=  f"""
-
-            This is the category: {category} and this is the specific subtopic {topic}.
-
-            In short answer questions, the answer should not be more than one word!!!! You understand that???!!! If it's more than one word, I will kill myself. I actually will.
-
-            Science Bowl is an advanced high-school, challenging buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z).
-
-            These questions are read out loud. Make sure that the questions are 50-50 multiple-choice and short answer, and ensure that no short answer questions ask to explain anything - short answers answers should be either a term or a number resulting from a calculation (one word max). Also ensure that in multiple-choice questions, there are 4 choices and each choice is designated with the letters W, X, Y, and Z.
-
-            Also ensure that the answer to all questions is logical but still decently difficult and not just elementary school stuff. Even it's some randomly specific word, it should be clear from the context of the question. But make sure that these questions are challenging and made for advanced high-school level students.
-
-            Using ONLY this context {retrieved_text}, generate a Science Bowl question.
-
-            Once again, this is the category: {category}.
-
-            NEVER EVER REFER TO THE PASSAGE. The competitors answering these questions do not have access to the context you are given.
-
-            I want to EMPHASIZE SOME REALLY IMPORTANT INFORMATION now, PROBABLY THE MOST FREAKING IMPORTANTLY IMPORTANT INFORMATION HERE that you have to ENSURE that the question CAN BE ANSWERED solely using the provided context. If the context talks about something, you must incorporate the words of the context into your question. No adding of other information!! Otherwise I will make sure you don't generate a single response ever again.
-
-            ANOTHER MASSIVELY HUGE THING THAT IS SUPER IMPORTANT. I WILL GIVE YOU ONE HUNDRED EXTRA CREDIT POINTS IF YOU DO THIS: DON'T PROVIDE THE ANSWER TO THE QUESTION at the end. Just leave the question. Someone else will answer the question, you WILL NOT PROVIDE THE ANSWER.
-
-            This means that someone should be able to answer your queston simply by looking at the context provided. No added information other than the context. I don't care what it is, no adding information outside of your narrow context. If that happens, I will kill myself.
-
-            The question should be properly formatted and should not contain any errors.
-
-            """
-
-            completion = client.chat.completions.create(
-                model="ft:gpt-4o-mini-2024-07-18:personal::AzCT79vQ",
-                messages=[
-                    {"role": "developer", "content": "You ask Science Bowl questions. Science Bowl is a buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z.."},
-                    {"role": "user", "content": prompt}
-                ]
-            )
-            return completion.choices[0].message.content
+        if(difficulty==0):
+            prompt += "These questions are meant to be relatively easy and maybe a sentence or two. They should be straightforward and for middle school students."
+        elif(difficulty==1):
+            prompt += "These questions are meant to be relatively medium and at least a couple of sentences. They should be logical and not too complex yet not simple and for advanced high school students."
+        elif(difficulty==2):
+            prompt += "These questions are meant to be difficult and relatively lengthy. They should require high-level thinking and reference difficult terms; these are meant for college-level students."
+        elif(difficulty==3):
+            prompt += "These questions are extremely difficult and pretty lengthy. They cannot just be rote memorization and should require a significant degree of high-level thinking and intelligence. These are meant for highly advanced graduate-level students and PhDs in a field."
         
-        question = generate_science_bowl_question()
-        st.write(question)
+        prompt +=  f"""
 
-        def answer_science_bowl_question():
-            prompt = f"""
+        This is the category: {category} and this is the specific subtopic {topic}.
 
-            Explain how to solve this question: {question}.
+        In short answer questions, the answer should not be more than one word!!!! You understand that???!!! If it's more than one word, I will kill myself. I actually will.
 
-            While verifying, make sure that you don't need to make any unnecessary assumptions to solve it.
+        Science Bowl is an advanced high-school, challenging buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z).
 
-            If the answer to the question is already given, don't hesitate to question the given answer. It may be wrong.
+        These questions are read out loud. Make sure that the questions are 50-50 multiple-choice and short answer, and ensure that no short answer questions ask to explain anything - short answers answers should be either a term or a number resulting from a calculation (one word max). Also ensure that in multiple-choice questions, there are 4 choices and each choice is designated with the letters W, X, Y, and Z.
 
-            You will be returning an explanation of your solution to the questions.
+        Also ensure that the answer to all questions is logical but still decently difficult and not just elementary school stuff. Even it's some randomly specific word, it should be clear from the context of the question. But make sure that these questions are challenging and made for advanced high-school level students.
 
-            If any of the questions are wrong (a decent fraction of them may be wrong), then rewrite the entire question (both the toss-up and bonus) by keeping the original ideas intact but making the necessary changes.
+        Using ONLY this context {retrieved_text}, generate a Science Bowl question.
 
-            For example, in a multiple choice question, if none of the answers are right, change the question by replacing one of the answer choices with the correct choice.
+        Once again, this is the category: {category}.
 
-            ONE SUPER IMPORTANT THING IS THAT COMPETITORS DON'T HAVE ACCESS TO A CALCULATOR. Therefore, keep your answer in terms of constants if possible (like pi).
+        NEVER EVER REFER TO THE PASSAGE. The competitors answering these questions do not have access to the context you are given.
 
-            Add your fixed question at the end of your response. Even if the given question is correct, then write the same thing at the end of your response.
+        I want to EMPHASIZE SOME REALLY IMPORTANT INFORMATION now, PROBABLY THE MOST FREAKING IMPORTANTLY IMPORTANT INFORMATION HERE that you have to ENSURE that the question CAN BE ANSWERED solely using the provided context. If the context talks about something, you must incorporate the words of the context into your question. No adding of other information!! Otherwise I will make sure you don't generate a single response ever again.
 
-            Before writing the questions at the end, prelude it with the phrase THESE ARE THE QUESTIONS.
+        ANOTHER MASSIVELY HUGE THING THAT IS SUPER IMPORTANT. I WILL GIVE YOU ONE HUNDRED EXTRA CREDIT POINTS IF YOU DO THIS: DON'T PROVIDE THE ANSWER TO THE QUESTION at the end. Just leave the question. Someone else will answer the question, you WILL NOT PROVIDE THE ANSWER.
 
-            Also, make sure you provide the answers to the questions given, without a solution. Just the answers.
+        This means that someone should be able to answer your queston simply by looking at the context provided. No added information other than the context. I don't care what it is, no adding information outside of your narrow context. If that happens, I will kill myself.
 
-            """
+        The question should be properly formatted and should not contain any errors.
 
-            # Explain how to solve this question: {question}. You will be returning an explanation of your solution to the questions.
+        """
 
-            # Follow these criteria while verifying the validity and appropriateness of the question:
-            #     - Does the answer you get not match any of the listed answers (multiple choice) or does your answer not match the given answer listed by the question?
-            #     - Does it require a calculator? If it does, make the numbers nicer or change the question entirely. The contestants solving these questions won't have access to a calculator.
-            #     - Can the toss-up be solved in less than 5 seconds?
-            #     - Can the bonus be solved in less than 20 seconds?
-            #     - Does the question make the answer too obvious? (e.g. mentioning the answer in the question or hinting at it with a very obvious key word)
-            #     - Does the question require any unnecessary assumptions? (e.g. having to guess the mass of an object if it's not given)
+        completion = client.chat.completions.create(
+            model="ft:gpt-4o-mini-2024-07-18:personal::AzCT79vQ",
+            messages=[
+                {"role": "developer", "content": "You ask Science Bowl questions. Science Bowl is a buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z.."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return completion.choices[0].message.content
+    
+    question = generate_science_bowl_question()
+    st.write(question)
 
-            completion = client.chat.completions.create(
-                model="gpt-4o-mini-2024-07-18",
-                messages=[
-                    {"role": "developer", "content": "You solve Science Bowl questions. Science Bowl is a buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z.."},
-                    {"role": "user", "content": prompt}
-                ]
-            )
-            return completion.choices[0].message.content
+    def answer_science_bowl_question():
+        prompt = f"""
 
-        ans = answer_science_bowl_question()
-        st.write(ans)
+        Explain how to solve this question: {question}.
 
-        # def fix_science_bowl_question():
-        #     prompt = f"""
+        While verifying, make sure that you don't need to make any unnecessary assumptions to solve it.
 
-        #     Given this {question} and this feedback on the question {ans}, 
-            
-        #     You will be rewriting the given question accordingly.
-        #     """
+        If the answer to the question is already given, don't hesitate to question the given answer. It may be wrong.
+
+        You will be returning an explanation of your solution to the questions.
+
+        If any of the questions are wrong (a decent fraction of them may be wrong), then rewrite the entire question (both the toss-up and bonus) by keeping the original ideas intact but making the necessary changes.
+
+        For example, in a multiple choice question, if none of the answers are right, change the question by replacing one of the answer choices with the correct choice.
+
+        ONE SUPER IMPORTANT THING IS THAT COMPETITORS DON'T HAVE ACCESS TO A CALCULATOR. Therefore, keep your answer in terms of constants if possible (like pi).
+
+        Add your fixed question at the end of your response. Even if the given question is correct, then write the same thing at the end of your response.
+
+        Before writing the questions at the end, prelude it with the phrase THESE ARE THE QUESTIONS.
+
+        Also, make sure you provide the answers to the questions given, without a solution. Just the answers.
+
+        """
+
+        # Explain how to solve this question: {question}. You will be returning an explanation of your solution to the questions.
+
+        # Follow these criteria while verifying the validity and appropriateness of the question:
+        #     - Does the answer you get not match any of the listed answers (multiple choice) or does your answer not match the given answer listed by the question?
+        #     - Does it require a calculator? If it does, make the numbers nicer or change the question entirely. The contestants solving these questions won't have access to a calculator.
+        #     - Can the toss-up be solved in less than 5 seconds?
+        #     - Can the bonus be solved in less than 20 seconds?
+        #     - Does the question make the answer too obvious? (e.g. mentioning the answer in the question or hinting at it with a very obvious key word)
+        #     - Does the question require any unnecessary assumptions? (e.g. having to guess the mass of an object if it's not given)
+
+        completion = client.chat.completions.create(
+            model="gpt-4o-mini-2024-07-18",
+            messages=[
+                {"role": "developer", "content": "You solve Science Bowl questions. Science Bowl is a buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z.."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return completion.choices[0].message.content
+
+    ans = answer_science_bowl_question()
+    st.write(ans)
+
+    # def fix_science_bowl_question():
+    #     prompt = f"""
+
+    #     Given this {question} and this feedback on the question {ans}, 
+        
+    #     You will be rewriting the given question accordingly.
+    #     """
 
         
 
