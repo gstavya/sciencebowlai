@@ -2889,23 +2889,9 @@ def answer_science_bowl_question(question):
 
         Explain how to solve this question: {question}.
 
-        While verifying, make sure that you don't need to make any unnecessary assumptions to solve it.
+        If your answer doesn't match the provided answer, rewrite the question.
 
-        If the answer to the question is already given, don't hesitate to question the given answer. It may be wrong.
-
-        You will be returning an explanation of your solution to the questions.
-
-        If any of the questions are wrong (a decent fraction of them may be wrong), then rewrite the entire question (both the toss-up and bonus) by keeping the original ideas intact but making the necessary changes.
-
-        For example, in a multiple choice question, if none of the answers are right, change the question by replacing one of the answer choices with the correct choice.
-
-        ONE SUPER IMPORTANT THING IS THAT COMPETITORS DON'T HAVE ACCESS TO A CALCULATOR. Therefore, keep your answer in terms of constants if possible (like pi).
-
-        Add your fixed question at the end of your response. Even if the given question is correct, then write the same thing at the end of your response.
-
-        Before writing the questions at the end, prelude it with the phrase THESE ARE THE QUESTIONS.
-
-        Also, make sure you provide the answers to the questions given, without a solution. Just the answers.
+        If the answer to a short answer question, even if it's right, is more than one word or number or term, rewrite the question so that it's only one word or a term.
 
         """
 
