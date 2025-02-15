@@ -2892,8 +2892,6 @@ def answer_science_bowl_question(question):
 
         If your answer doesn't match the provided answer, rewrite the question.
 
-        If the answer to a short answer question, even if it's right, is more than one word or number or term, rewrite the question so that it's only one word or a term.
-
         Your response should solely consist of the revised questions. Make sure the answers you provide to them are absolutely right!
 
         """
