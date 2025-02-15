@@ -2869,6 +2869,7 @@ def verify_science_bowl_question(question):
             - Does the question make the answer too obvious? (e.g. mentioning the answer in the question or hinting at it with a very obvious key word)
             - Does the question require any unnecessary assumptions? (e.g. having to guess the mass of an object if it's not given or guessing the molarity of a solution)
             - Participants will not have access to periodic tables or pages with constants, so does the question require knowledge of constants or specific values like atomic masses?
+            - Is the question too easy? Make it more difficult!
 
     You should simply return a modified version of the question given. Make sure to make necessary changes.
 
@@ -2887,13 +2888,13 @@ def verify_science_bowl_question(question):
 def answer_science_bowl_question(question):
         prompt = f"""
 
-        Explain how to solve this question: {question}.
+        Solve this question: {question}.
 
         If your answer doesn't match the provided answer, rewrite the question.
 
         If the answer to a short answer question, even if it's right, is more than one word or number or term, rewrite the question so that it's only one word or a term.
 
-        Your response should be a full explanation on how to solve the question.
+        Your response should solely consist of the revised questions. Make sure the answers you provide to them are absolutely right!
 
         """
 
@@ -2936,18 +2937,7 @@ if st.button("Generate Question"):
     difficulty = 3
     retrieved_text = ans[index]
     question = generate_science_bowl_question(retrieved_text, difficulty, category, topic)
-    st.write(question)
     question_modified = verify_science_bowl_question(question)
-    st.write(question_modified)
-    ans = answer_science_bowl_question(question_modified)
-    st.write(ans)
-
-    # def fix_science_bowl_question():
-    #     prompt = f"""
-
-    #     Given this {question} and this feedback on the question {ans}, 
-        
-    #     You will be rewriting the given question accordingly.
-    #     """
-
+    question_final = answer_science_bowl_question(question_modified)
+    st.write(question_final)
         
