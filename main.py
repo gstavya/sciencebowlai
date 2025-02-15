@@ -2905,80 +2905,85 @@ def answer_science_bowl_question(question):
         )
         return completion.choices[0].message.content
 
-import streamlit as st
-import time
+def check_toss_up_answer(toss_up_answer, correct_answer):
+    return toss_up_answer.strip().lower() == correct_answer.strip().lower()
 
-# Timer function to limit the time for answering
-def timed_input(prompt, max_time):
-    st.write(prompt)
-    timer_start = time.time()
-    user_input = st.text_input("Your answer:")
-    elapsed_time = time.time() - timer_start
-    
-    if elapsed_time > max_time:
-        st.warning(f"Time's up! You took too long. (Max time: {max_time} seconds)")
-        return None  # No answer if time is up
-    elif user_input:
-        return user_input  # Return the user's answer if they typed something before time runs out
-    return None  # Return None if the input is empty within the time limit
+def check_bonus_answer(bonus_answer, correct_bonus_answer):
+    return bonus_answer.strip().lower() == correct_bonus_answer.strip().lower()
 
-# Main code for generating the question
 if st.button("Generate Question"):
     category, topic = select_topic()
     index = 0
-    if(category=="Energy"):
+    if category == "Energy":
         index = y
     else:
         for i in range(len(subtopics[category])):
-            if(subtopics[category][i]==(topic)):
+            if subtopics[category][i] == topic:
                 index = i
                 break
+
     ans = []
-    if(category=="Chemistry"):
+    if category == "Chemistry":
         ans = chem_text
-    elif(category=="Physics"):
+    elif category == "Physics":
         ans = phys_text
-    elif(category=="Biology"):
+    elif category == "Biology":
         ans = bio_text
-    elif(category=="Math"):
+    elif category == "Math":
         ans.append(subtopics[category][index])
         index = 0
-    elif(category=="Energy"):
-        if(x==0):
+    elif category == "Energy":
+        if x == 0:
             ans = phys_text
-        elif(x==1):
+        elif x == 1:
             ans = chem_text
         else:
             ans = bio_text
+
     difficulty = 3
     retrieved_text = ans[index]
     question = generate_science_bowl_question(retrieved_text, difficulty, category, topic)
     question_modified = verify_science_bowl_question(question)
     question_final = answer_science_bowl_question(question_modified)
+
     index = 0
     for i in range(len(question_final)):
-        if(question_final[i:i+5]=="BONUS"):
+        if question_final[i:i+5] == "BONUS":
             index = i
     toss_up = question_final[0:index]
-    bonus = question_final[index+1:]
-    
-    # Ask the toss-up question first with a 5-second timer
-    toss_up_answer = timed_input(f"Toss-up Question: {toss_up}", 5)
-    
-    if toss_up_answer:  # If user answered correctly within time
-        # Proceed to the bonus question only if the toss-up is correct
-        if toss_up_answer.lower() == correct_toss_up_answer.lower():
-            st.success("Correct! Now, here's the bonus question.")
-            # Ask the bonus question with a 20-second timer
-            bonus_answer = timed_input(f"Bonus Question: {bonus}", 20)
+    bonus = question_final[index + 1:]
+
+    st.subheader("Toss-Up Question")
+    st.write(toss_up)
+
+    toss_up_answer = st.text_input("Your answer:")
+    if toss_up_answer:
+        timer = st.empty()
+        for t in range(5, 0, -1):
+            timer.text(f"Time remaining: {t} seconds")
+            time.sleep(1)
+
+        correct_toss_up_answer = "actin"
+        if check_toss_up_answer(toss_up_answer, correct_toss_up_answer):
+            st.success("Correct! Moving to the Bonus Question.")
+            st.subheader("Bonus Question")
+            st.write(bonus)
+
+            bonus_answer = st.text_input("Your answer (Bonus):")
             if bonus_answer:
-                st.write(f"Your bonus answer: {bonus_answer}")
-            else:
-                st.warning("You didn't answer the bonus question in time.")
+                bonus_timer = st.empty()
+                for t in range(20, 0, -1):
+                    bonus_timer.text(f"Time remaining: {t} seconds")
+                    time.sleep(1)
+
+                correct_bonus_answer = "EXPECTED CORRECT BONUS ANSWER"
+                if check_bonus_answer(bonus_answer, correct_bonus_answer):
+                    st.success("Correct Bonus Answer!")
+                else:
+                    st.error("Incorrect Bonus Answer.")
         else:
-            st.warning("Incorrect toss-up answer. No bonus question.")
-    else:
-        st.warning("Time's up for the toss-up question!")
+            st.error("Incorrect Toss-Up Answer.")
+
 
     
         
