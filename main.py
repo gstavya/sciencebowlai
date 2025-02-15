@@ -2942,5 +2942,4 @@ if st.button("Generate Question"):
         if(question_final[i:i+5]=="BONUS"):
             index = i
     st.write(question_final[0:index])
-    st.write(question_final[index+1:])
         
