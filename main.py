@@ -2893,6 +2893,8 @@ def answer_science_bowl_question(question):
 
         If the answer to a short answer question, even if it's right, is more than one word or number or term, rewrite the question so that it's only one word or a term.
 
+        Your response should be a full explanation on how to solve the question.
+
         """
 
         completion = client.chat.completions.create(
