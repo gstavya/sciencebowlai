@@ -2935,9 +2935,7 @@ if st.button("Generate Question"):
     difficulty = 3
     retrieved_text = ans[index]
     question = generate_science_bowl_question(retrieved_text, difficulty, category, topic)
-    st.write(question)
     question_modified = verify_science_bowl_question(question)
-    st.write(question_modified)
     question_final = answer_science_bowl_question(question_modified)
     st.write(question_final)
         
