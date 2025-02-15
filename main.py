@@ -29,7 +29,7 @@ subtopics = {
 }
 
 def select_topic():
-    category = "Math"
+    category = random.choices(list(science_bowl_topics.keys()), weights=list(science_bowl_topics.values()))[0]
     if(category=="Energy"):
         topic = ""
     else:
@@ -2937,5 +2937,10 @@ if st.button("Generate Question"):
     question = generate_science_bowl_question(retrieved_text, difficulty, category, topic)
     question_modified = verify_science_bowl_question(question)
     question_final = answer_science_bowl_question(question_modified)
-    st.write(question_final)
+    index = 0
+    for i in range(len(question_final)):
+        if(question_final[i:i+5]=="BONUS"):
+            index = i
+    st.write(question_final[0:index])
+    st.write(question_final[index+1:])
         
