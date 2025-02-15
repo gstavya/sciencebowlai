@@ -2909,9 +2909,19 @@ def check_toss_up_answer(toss_up_answer, correct_answer):
     return toss_up_answer.strip().lower() == correct_answer.strip().lower()
 
 def check_bonus_answer(bonus_answer, correct_bonus_answer):
+    # Function to check if the bonus answer is correct
     return bonus_answer.strip().lower() == correct_bonus_answer.strip().lower()
 
+# Initialize session state variables
+if 'toss_up_answer' not in st.session_state:
+    st.session_state.toss_up_answer = ""
+if 'bonus_answer' not in st.session_state:
+    st.session_state.bonus_answer = ""
+if 'show_bonus' not in st.session_state:
+    st.session_state.show_bonus = False
+
 if st.button("Generate Question"):
+    # Step 1: Choose category and topic
     category, topic = select_topic()
     index = 0
     if category == "Energy":
@@ -2946,6 +2956,7 @@ if st.button("Generate Question"):
     question_modified = verify_science_bowl_question(question)
     question_final = answer_science_bowl_question(question_modified)
 
+    # Split the question into toss-up and bonus parts
     index = 0
     for i in range(len(question_final)):
         if question_final[i:i+5] == "BONUS":
@@ -2953,37 +2964,43 @@ if st.button("Generate Question"):
     toss_up = question_final[0:index]
     bonus = question_final[index + 1:]
 
+    # Step 2: Show Toss-Up Question and wait for user answer with a 5-second timer
     st.subheader("Toss-Up Question")
     st.write(toss_up)
 
-    toss_up_answer = st.text_input("Your answer:")
+    # Handle Toss-Up Answer
+    toss_up_answer = st.text_input("Your answer:", key="toss_up_answer", value=st.session_state.toss_up_answer)
     if toss_up_answer:
-        timer = st.empty()
+        # Start 5-second timer
+        timer_placeholder = st.empty()
         for t in range(5, 0, -1):
-            timer.text(f"Time remaining: {t} seconds")
+            timer_placeholder.text(f"Time remaining: {t} seconds")
             time.sleep(1)
 
-        correct_toss_up_answer = "actin"
+        correct_toss_up_answer = "EXPECTED CORRECT TOSS-UP ANSWER"  # Replace with actual expected answer
         if check_toss_up_answer(toss_up_answer, correct_toss_up_answer):
+            st.session_state.show_bonus = True  # Allow bonus question if toss-up is correct
             st.success("Correct! Moving to the Bonus Question.")
-            st.subheader("Bonus Question")
-            st.write(bonus)
-
-            bonus_answer = st.text_input("Your answer (Bonus):")
-            if bonus_answer:
-                bonus_timer = st.empty()
-                for t in range(20, 0, -1):
-                    bonus_timer.text(f"Time remaining: {t} seconds")
-                    time.sleep(1)
-
-                correct_bonus_answer = "EXPECTED CORRECT BONUS ANSWER"
-                if check_bonus_answer(bonus_answer, correct_bonus_answer):
-                    st.success("Correct Bonus Answer!")
-                else:
-                    st.error("Incorrect Bonus Answer.")
         else:
+            st.session_state.show_bonus = False  # Hide bonus question if toss-up is wrong
             st.error("Incorrect Toss-Up Answer.")
 
+    if st.session_state.show_bonus:
+        # Step 3: Show Bonus Question and wait for user answer with a 20-second timer
+        st.subheader("Bonus Question")
+        st.write(bonus)
 
-    
-        
+        # Handle Bonus Answer
+        bonus_answer = st.text_input("Your answer (Bonus):", key="bonus_answer", value=st.session_state.bonus_answer)
+        if bonus_answer:
+            # Start 20-second timer
+            bonus_timer_placeholder = st.empty()
+            for t in range(20, 0, -1):
+                bonus_timer_placeholder.text(f"Time remaining: {t} seconds")
+                time.sleep(1)
+
+            correct_bonus_answer = "EXPECTED CORRECT BONUS ANSWER"  # Replace with actual expected bonus answer
+            if check_bonus_answer(bonus_answer, correct_bonus_answer):
+                st.success("Correct Bonus Answer!")
+            else:
+                st.error("Incorrect Bonus Answer.")
