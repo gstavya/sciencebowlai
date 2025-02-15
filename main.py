@@ -2905,6 +2905,24 @@ def answer_science_bowl_question(question):
         )
         return completion.choices[0].message.content
 
+import streamlit as st
+import time
+
+# Timer function to limit the time for answering
+def timed_input(prompt, max_time):
+    st.write(prompt)
+    timer_start = time.time()
+    user_input = st.text_input("Your answer:")
+    elapsed_time = time.time() - timer_start
+    
+    if elapsed_time > max_time:
+        st.warning(f"Time's up! You took too long. (Max time: {max_time} seconds)")
+        return None  # No answer if time is up
+    elif user_input:
+        return user_input  # Return the user's answer if they typed something before time runs out
+    return None  # Return None if the input is empty within the time limit
+
+# Main code for generating the question
 if st.button("Generate Question"):
     category, topic = select_topic()
     index = 0
@@ -2941,5 +2959,26 @@ if st.button("Generate Question"):
     for i in range(len(question_final)):
         if(question_final[i:i+5]=="BONUS"):
             index = i
-    st.write(question_final[0:index])
+    toss_up = question_final[0:index]
+    bonus = question_final[index+1:]
+    
+    # Ask the toss-up question first with a 5-second timer
+    toss_up_answer = timed_input(f"Toss-up Question: {toss_up}", 5)
+    
+    if toss_up_answer:  # If user answered correctly within time
+        # Proceed to the bonus question only if the toss-up is correct
+        if toss_up_answer.lower() == correct_toss_up_answer.lower():
+            st.success("Correct! Now, here's the bonus question.")
+            # Ask the bonus question with a 20-second timer
+            bonus_answer = timed_input(f"Bonus Question: {bonus}", 20)
+            if bonus_answer:
+                st.write(f"Your bonus answer: {bonus_answer}")
+            else:
+                st.warning("You didn't answer the bonus question in time.")
+        else:
+            st.warning("Incorrect toss-up answer. No bonus question.")
+    else:
+        st.warning("Time's up for the toss-up question!")
+
+    
         
