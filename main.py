@@ -2875,6 +2875,15 @@ def verify_science_bowl_question(question):
 
     """
 
+    completion = client.chat.completions.create(
+            model="gpt-4o-mini-2024-07-18",
+            messages=[
+                {"role": "developer", "content": "You modify Science Bowl questions. Science Bowl is a buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z.."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+    return completion.choices[0].message.content
+
 def answer_science_bowl_question(question):
         prompt = f"""
 
