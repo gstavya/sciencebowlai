@@ -29,7 +29,7 @@ subtopics = {
 }
 
 def select_topic():
-    category = random.choices(list(science_bowl_topics.keys()), weights=list(science_bowl_topics.values()))[0]
+    category = "Math"
     if(category=="Energy"):
         topic = ""
     else:
