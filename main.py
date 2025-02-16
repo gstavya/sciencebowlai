@@ -2803,22 +2803,16 @@ energy_prompt = f"This is an energy question. In energy questions, you will brie
 import time
 
 def generate_science_bowl_question(retrieved_text, difficulty, category, topic):
+        print(retrieved_text)
         prompt = ""
         if(category=="Energy"):
             prompt += energy_prompt
         elif(category=="Math"):
             prompt += math_prompt
-
-        if(difficulty==0):
-            prompt += "These questions are meant to be relatively easy and maybe a sentence or two. They should be straightforward and for middle school students."
-        elif(difficulty==1):
-            prompt += "These questions are meant to be relatively medium and at least a couple of sentences. They should be logical and not too complex yet not simple and for advanced high school students."
-        elif(difficulty==2):
-            prompt += "These questions are meant to be difficult and relatively lengthy. They should require high-level thinking and reference difficult terms; these are meant for college-level students."
-        elif(difficulty==3):
-            prompt += "These questions are extremely difficult and pretty lengthy. They cannot just be rote memorization and should require a significant degree of high-level thinking and intelligence. These are meant for highly advanced graduate-level students and PhDs in a field."
         
         prompt +=  f"""
+       
+        The questions should be appropriate for college students.
 
         This is the category: {category} and this is the specific subtopic {topic}.
 
@@ -2844,6 +2838,8 @@ def generate_science_bowl_question(retrieved_text, difficulty, category, topic):
 
         The question should be properly formatted and should not contain any errors.
 
+        The questions should be appropriate for college students.
+
         """
 
         completion = client.chat.completions.create(
@@ -2855,14 +2851,18 @@ def generate_science_bowl_question(retrieved_text, difficulty, category, topic):
         )
         return completion.choices[0].message.content
 
-def verify_science_bowl_question(question):
-    prompt = f"""
+def verify_science_bowl_question(question, difficulty):
+    prompt = ""
+    prompt += f"""
+
+    The questions should be appropriate for advanced college students. What you're spewing out is middle school level questions. C'mon man!
 
     This is an AI-generated Science Bowl question: {question}.
 
     Your job is to make changes so that the question is appropriate for the Science Bowl competition.
 
     Follow these criteria while verifying the validity and appropriateness of the question:
+            - If it is short answer, does the answer require an explanation, an equation, or an open-ended, non-objective question? If so, change the question! No explanations or open-ended answers as answers! Everything in this competition is objective.
             - Does it require a calculator? If it does, make the numbers nicer or change the question entirely. The contestants solving these questions won't have access to a calculator.
             - Can the toss-up be solved in less than 5 seconds?
             - Can the bonus be solved in less than 20 seconds?
@@ -2873,6 +2873,9 @@ def verify_science_bowl_question(question):
 
     You should simply return a modified version of the question given. Make sure to make necessary changes.
 
+    One super important thing you keep screwing up: especially for physics questions, in short answers, don't ask for explanations or equations. Only ask for numerical answers or one word terms!!!
+
+    The questions should be appropriate for advanced college students. What you're spewing out is middle school level questions. C'mon man!
 
     """
 
@@ -2885,43 +2888,40 @@ def verify_science_bowl_question(question):
         )
     return completion.choices[0].message.content
 
-def answer_science_bowl_question(question):
-        prompt = f"""
+def similarity(question, user_answer):
+    prompt = f"""
 
-        Solve this question: {question}.
+    This is the {question}.
 
-        If your answer doesn't match the provided answer, rewrite the question.
+    Assess the user's answer: {user_answer}.
 
-        Your response should solely consist of the revised questions. Make sure the answers you provide to them are absolutely right!
+    Give an explanation on how to solve the question.
 
-        """
-
-        completion = client.chat.completions.create(
+    """
+    completion = client.chat.completions.create(
             model="gpt-4o-mini-2024-07-18",
             messages=[
-                {"role": "developer", "content": "You solve Science Bowl questions. Science Bowl is a buzzer-based competition centered around speed and consisting of questions in five subjects: math, earth and space science, physics, chemistry, and biology. You write Science Bowl questions on a given topic. Each Science Bowl question consists of a toss-up, to be solved in under 5 seconds, and a bonus, to be done in under 20 seconds. Each toss-up and bonus must be either short answer (no answer choices) or multiple choice (4 choices given, designated with W, X, Y, and Z.."},
+                {"role": "developer", "content": "You determine whether the user's answer is the same as the actual answer."},
                 {"role": "user", "content": prompt}
             ]
-        )
-        return completion.choices[0].message.content
+    )
+    return completion.choices[0].message.content
 
-def check_toss_up_answer(toss_up_answer, correct_answer):
-    return toss_up_answer.strip().lower() == correct_answer.strip().lower()
 
-def check_bonus_answer(bonus_answer, correct_bonus_answer):
-    # Function to check if the bonus answer is correct
-    return bonus_answer.strip().lower() == correct_bonus_answer.strip().lower()
-
-# Initialize session state variables
-if 'toss_up_answer' not in st.session_state:
-    st.session_state.toss_up_answer = ""
-if 'bonus_answer' not in st.session_state:
-    st.session_state.bonus_answer = ""
-if 'show_bonus' not in st.session_state:
-    st.session_state.show_bonus = False
+if "question_final" not in st.session_state:
+    st.session_state.question_final = None
+if "toss_up_attempt" not in st.session_state:
+    st.session_state.toss_up_attempt = ""
+if "bonus_attempt" not in st.session_state:
+    st.session_state.bonus_attempt = ""
+if "bonus_revealed" not in st.session_state:
+    st.session_state.bonus_revealed = False
 
 if st.button("Generate Question"):
-    # Step 1: Choose category and topic
+    st.session_state.toss_up_attempt = ""
+    st.session_state.bonus_attempt = ""
+    st.session_state.bonus_revealed = False 
+
     category, topic = select_topic()
     index = 0
     if category == "Energy":
@@ -2952,55 +2952,42 @@ if st.button("Generate Question"):
 
     difficulty = 3
     retrieved_text = ans[index]
-    question = generate_science_bowl_question(retrieved_text, difficulty, category, topic)
-    question_modified = verify_science_bowl_question(question)
-    question_final = answer_science_bowl_question(question_modified)
+    st.session_state.question_final = generate_science_bowl_question(retrieved_text, difficulty, category, topic)
 
-    # Split the question into toss-up and bonus parts
-    index = 0
-    for i in range(len(question_final)):
-        if question_final[i:i+5] == "BONUS":
-            index = i
-    toss_up = question_final[0:index]
-    bonus = question_final[index + 1:]
+if st.session_state.question_final:
+    bonus_index = 0
+    for i in range(len(st.session_state.question_final)):
+        if st.session_state.question_final[i:i+5] == "BONUS":
+            bonus_index = i
 
-    # Step 2: Show Toss-Up Question and wait for user answer with a 5-second timer
-    st.subheader("Toss-Up Question")
+    tossup_ans_index = 0
+    for i in range(len(st.session_state.question_final)):
+        if st.session_state.question_final[i:i+6] == "ANSWER":
+            tossup_ans_index = i
+            break
+
+    bonus_ans_index = 0
+    for i in range(len(st.session_state.question_final)):
+        if st.session_state.question_final[i:i+6] == "ANSWER":
+            bonus_ans_index = i
+    
+    toss_up = st.session_state.question_final[0:tossup_ans_index]
+    bonus = st.session_state.question_final[bonus_index:bonus_ans_index]
+    
+    st.write("### Toss-Up Question:")
     st.write(toss_up)
 
-    # Handle Toss-Up Answer
-    toss_up_answer = st.text_input("Your answer:", key="toss_up_answer", value=st.session_state.toss_up_answer)
-    if toss_up_answer:
-        # Start 5-second timer
-        timer_placeholder = st.empty()
-        for t in range(5, 0, -1):
-            timer_placeholder.text(f"Time remaining: {t} seconds")
-            time.sleep(1)
+    st.session_state.toss_up_attempt = st.text_input("Your Answer for Toss-Up:", st.session_state.toss_up_attempt)
+    if st.session_state.toss_up_attempt:
+        st.write(similarity(toss_up, st.session_state.toss_up_attempt))
 
-        correct_toss_up_answer = "EXPECTED CORRECT TOSS-UP ANSWER"  # Replace with actual expected answer
-        if check_toss_up_answer(toss_up_answer, correct_toss_up_answer):
-            st.session_state.show_bonus = True  # Allow bonus question if toss-up is correct
-            st.success("Correct! Moving to the Bonus Question.")
-        else:
-            st.session_state.show_bonus = False  # Hide bonus question if toss-up is wrong
-            st.error("Incorrect Toss-Up Answer.")
+    if st.button("Reveal Bonus"):
+        st.session_state.bonus_revealed = True 
 
-    if st.session_state.show_bonus:
-        # Step 3: Show Bonus Question and wait for user answer with a 20-second timer
-        st.subheader("Bonus Question")
+    if st.session_state.bonus_revealed:
+        st.write("### Bonus Question:")
         st.write(bonus)
 
-        # Handle Bonus Answer
-        bonus_answer = st.text_input("Your answer (Bonus):", key="bonus_answer", value=st.session_state.bonus_answer)
-        if bonus_answer:
-            # Start 20-second timer
-            bonus_timer_placeholder = st.empty()
-            for t in range(20, 0, -1):
-                bonus_timer_placeholder.text(f"Time remaining: {t} seconds")
-                time.sleep(1)
-
-            correct_bonus_answer = "EXPECTED CORRECT BONUS ANSWER"  # Replace with actual expected bonus answer
-            if check_bonus_answer(bonus_answer, correct_bonus_answer):
-                st.success("Correct Bonus Answer!")
-            else:
-                st.error("Incorrect Bonus Answer.")
+        st.session_state.bonus_attempt = st.text_input("Your Answer for Bonus:", st.session_state.bonus_attempt)
+        if st.session_state.bonus_attempt:
+            st.write(similarity(bonus, st.session_state.bonus_attempt))
