@@ -4069,119 +4069,15 @@ bio_text = [
 
 '''
 
-SUMMARY OF KEY CONCEPTS
-CONCEPT 2.1
-Matter consists of chemical elements in pure form and in combinations called compounds (pp. 29-30)
-■ Elements cannot be broken down chemically
-to other substances. A compound contains two
-VOCAB SELF-QUIZ goo.gl/6u55ks
-or more different elements in a fixed ratio. Oxygen, carbon, hydrogen, and nitrogen make up approximately 96% of living matter.
-? Compare an element and a compound.
-CONCEPT 2.2
-An element's properties depend on the structure of its atoms (pp. 30-36)
-An atom, the smallest unit of an element, has the following components:
-Nucleus
-Protons (+ charge)- determine element
-Neutrons (no charge)- determine isotope
-Atom
-Electrons (charge) form negative cloud and determine chemical behavior
-■ An electrically neutral atom has equal numbers of electrons and protons; the number of protons determines the atomic number. The atomic mass is measured in daltons and is roughly equal to the mass number, the sum of protons plus neutrons. Isotopes of an element differ from each other in neutron number and therefore mass. Unstable isotopes give off particles and energy as radioactivity.
-■ In an atom, electrons occupy specific electron shells; the elec- trons in a shell have a characteristic energy level. Electron distri- bution in shells determines the chemical behavior of an atom. An atom that has an incomplete outer shell, the valence shell, is reactive.
-■ Electrons exist in orbitals, three-dimensional spaces with spe- cific shapes that are components of electron shells.
-Molecules consist of two or more covalently bonded atoms. The attraction of an atom for the electrons of a covalent bond is its electronegativity. If both atoms are the same, they have the same electronegativity and share a nonpolar covalent bond. Electrons of a polar covalent bond are pulled closer to the more electronegative atom, such as the oxygen in H2O. An ion forms when an atom or molecule gains or loses an elec- tron and becomes charged. An ionic bond is the attraction between two oppositely charged ions:
-(Na)
-Na Sodium atom
-CI Chlorine atom
-Electron transfer forms ions
-Na
-Ionic bond
-Na+ Sodium ion (a cation)
-CI
-Chloride ion
-(an anion)
-Weak interactions reinforce the shapes of large molecules and help molecules adhere to each other. A hydrogen bond is an attraction between a hydrogen atom carrying a partial positive charge (8+) and an electronegative atom carrying a partial nega- tive charge (8-). Van der Waals interactions occur between transiently positive and negative regions of molecules.
-■ A molecule's shape is determined by the positions of its atoms' valence orbitals. Covalent bonds result in hybrid orbitals, which are responsible for the shapes of H2O, CH1, and many more com- plex biological molecules. Molecular shape is usually the basis for the recognition of one biological molecule by another.
-? In terms of electron sharing between atoms, compare nonpolar covalent bonds, polar covalent bonds, and the formation of ions.
-CONCEPT 2.4
-Chemical reactions make and break chemical bonds (pp. 40-41)
-■Chemical reactions change reactants into products while conserving matter. All chemical reactions are theoretically revers- ible. Chemical equilibrium is reached when the forward and reverse reaction rates are equal.
-
-CONCEPT 2.3
-The formation and function of molecules depend on chemical bonding between atoms (pp. 36-40)
-Chemical bonds form when atoms interact and complete their valence shells. Covalent bonds form when pairs of electrons are shared:
-H. + H.
-H:H Single
-0 +0:
-0::0
-Double
-covalent bond
-covalent bond
-
-''',
-
-'''
-
-SUMMARY OF KEY CONCEPTS
-CONCEPT 3.1
-Polar covalent bonds in water
-molecules result in hydrogen
-bonding (p. 45)
-■Water is a polar molecule. A hydrogen bond
-forms when a partially negatively charged region on the oxygen of one
-water molecule is attracted to the
-partially positively charged hydro-
-8+8
-gen of a nearby water molecule. Hydrogen bonding between water molecules is the
-basis for water's properties.
-VOCAB
-SELF-QUIZ goo.gl/6u55ks
-st...8
-DRAW IT ➤ Label a hydrogen bond and a polar covalent bond in the dia- gram of five water molecules. Is a hydrogen bond a covalent bond? Explain.
-CONCEPT 3.2
-Four emergent properties of water contribute to Earth's suitability for life (pp. 45-50)
-■ Hydrogen bonding keeps water molecules close to each other, giving water cohesion. Hydrogen bonding is also responsible for water's surface tension.
-■Water has a high specific heat: Heat is absorbed when hydrogen bonds break and is released when hydrogen bonds form. This helps keep temperatures relatively steady, within limits that permit life. Evaporative cooling is based on water's high heat of vaporization. The evaporative loss of the most energetic water molecules cools a surface.
-
-■ Ice floats because it is less dense than liquid water. This property allows life to exist under the frozen surfaces of lakes and polar seas. ■Water is an unusually versatile solvent because its polar mol- ecules are attracted to ions and polar substances that can form hydrogen bonds. Hydrophilic substances have an affinity for water; hydrophobic substances do not. Molarity, the number of moles of solute per liter of solution, is used as a measure of solute concentration in solutions. A mole is a certain number of molecules of a substance. The mass of a mole of a substance in grams is the same as the molecular mass in daltons. The emergent properties of water support life on Earth and may contribute to the potential for life to have evolved on other planets.
-
-CONCEPT 3.3
-Acidic and basic conditions affect living
-organisms (pp. 51-54)
-■ A water molecule can transfer an H+ to another water molecule
-0
-Acidic [H+] > [OH]
-Acids donate H+ in aqueous solutions.
-to form H3O+ (represented simply by H*) and OH. ■The concentration of H+ is expressed as pH; pH = −log [H+]. A buffer consists of an acid-base pair that combines reversibly with hydrogen ions, allowing it to resist pH changes. ■The burning of fossil fuels increases the amount of CO2 in the atmosphere. Some CO2 dissolves in the oceans, causing ocean acidification, which has potentially grave conse- quences for marine organisms that rely on calcification.
-Neutral [H+] = [OH]
--7
-Bases donate OH or accept H* in aqueous solutions.
-Basic [H+] < [OH]
--14
-
-''',
-
-'''
-
-SUMMARY OF KEY CONCEPTS
-CONCEPT 4.1
-Organic chemistry is the study of carbon compounds (pp. 57-58)
-■ Organic compounds, once thought to arise only within living organisms, were finally synthesized in the laboratory.
-VOCAB SELF-QUIZ goo.gl/6u55ks
-■Living matter is made mostly of carbon, oxygen, hydrogen, and nitrogen. Biological diversity results from carbon's ability to form a huge number of molecules with particular shapes and properties. ? How did Stanley Miller's experiments support the idea that, even at life's origins, physical and chemical laws govern the processes of life?
-CONCEPT 4.2
-Carbon atoms can form diverse molecules by bonding to four other atoms (pp. 58-62)
-Carbon, with a valence of 4, can bond to various other atoms, including O, H, and N. Carbon can also bond to other carbon
-atoms, forming the carbon skeletons of organic compounds. These skeletons vary in length and shape and have bonding sites for atoms of other elements.
-■ Hydrocarbons consist of carbon and hydrogen.
-■ Isomers are compounds that have the same molecular formula but different structures and therefore different properties. Three types of isomers are structural isomers, cis-trans isomers, and enantiomers.
-VISUAL SKILLS > Refer back to Figure 4.9. What type of isomers are acetone and propanal? How many asymmetric carbons are present in acetic acid, glycine, and glycerol phosphate? Can these three molecules exist as forms that are enantiomers?
-CONCEPT 4.3
-A few chemical groups are key to molecular function (pp. 62-64)
-Chemical groups attached to the carbon skeletons of organic molecules participate in chemical reactions (functional groups) or contribute to function by affecting molecular shape (see Figure 4.9).
+Living matter is made mostly of carbon, oxygen, hydrogen, and nitrogen. Biological diversity results from carbon's ability to form a huge number of molecules with particular shapes and properties.
+Carbon atoms can form diverse molecules by bonding to four other atoms.
+Carbon, with a valence of 4, can bond to various other atoms, including O, H, and N. Carbon can also bond to other carbon atoms, forming the carbon skeletons of organic compounds. These skeletons vary in length and shape and have bonding sites for atoms of other elements.
+Hydrocarbons consist of carbon and hydrogen. Isomers are compounds that have the same molecular formula but different structures and therefore different properties. Three types of isomers are structural isomers, cis-trans isomers, and enantiomers.
+A few chemical groups are key to molecular function.
+Chemical groups attached to the carbon skeletons of organic molecules participate in chemical reactions (functional groups) or contribute to function by affecting molecular shape.
 ■ ATP (adenosine triphosphate) consists of adenosine attached to three phosphate groups. ATP can react with water, forming
-
 ADP (adenosine diphosphate) and inorganic phosphate. This reaction releases energy that can be used by the cell.
-Reacts with H2O
+ATP Reacts with H2O
 Adenosine
 Adenosine + P+ Energy
 ATP
@@ -4859,6 +4755,10 @@ def generate_science_bowl_question(temp_category, retrieved_text, difficulty, ca
         
         prompt +=  f"""
 
+        The question must consist of both a toss-up and a bonus.
+
+        The question should have both a tossup and bonus, and it should start with TOSSUP {category} short answer/multiple choice, and the bonus should start with BONUS {category} short answer/multiple choice.
+
         Use this question {question_example} as a reference while creating the style of the toss-up and the bonus.
 
         To explain, the question presented is a {question_style} type of question: {question_instructions}.
@@ -4874,6 +4774,8 @@ def generate_science_bowl_question(temp_category, retrieved_text, difficulty, ca
         This is the specific subtopic {topic}, which shouldn't be labeled.
 
         Using ONLY this context {retrieved_text}, generate a Science Bowl question.
+
+        The question must be on this {category} and specifically this {topic}.
 
         In short answer questions, the answer should not be more than one word!!!!
 
@@ -4910,7 +4812,7 @@ def generate_science_bowl_question(temp_category, retrieved_text, difficulty, ca
         )
         return completion.choices[0].message.content
 
-def verify_science_bowl_question(temp_category, category, question, difficulty, question_style, question_example, question_instructions):
+def verify_science_bowl_question(temp_category, category, topic,question, difficulty, question_style, question_example, question_instructions):
     prompt = "The question should be difficult. The meaning of difficult is that it covers less-known, obscure terms."
     energy_prompt = f"This is an energy question. In energy questions, you will briefly mention research being done at a random lab - e.g. Sandia National Labs, Ames Laboratory, Argonne National Laboratory, Brookhaven National Laboratory, Fermi National Accelerator Laboratory, Frederick National Laboratory for Cancer Research, Idaho National Laboratory, Lawrence Berkeley National Laboratory, Lawrence Livermore National Laboratory. After that, you will ask a random {temp_category} question based on that research. Do this for both the toss-up question and the bonus question. The category should be explicitly stated as Energy."
     if(category=="Energy"):
@@ -4918,19 +4820,29 @@ def verify_science_bowl_question(temp_category, category, question, difficulty, 
 
     prompt += f"""
 
+    Your goal is to fix the questions
+
+    The question should have both a tossup and bonus, and it should start with TOSSUP {category} short answer/multiple choice, and the bonus should start with BONUS {category} short answer/multiple choice.
+
     Keep in mind that this question {question_example} must be used as a reference for both the toss-up and the bonus!
 
     To explain, the question presented is a {question_style} type of question: {question_instructions}.
 
     Both the toss-up and bonus must follow this format!! They both must be {question_style}.
 
-    The questions should be appropriate for advanced college students. What you're spewing out is middle school level questions. C'mon man!
-
     This is an AI-generated Science Bowl question: {question}.
 
-    Your job is to make changes so that the question is appropriate for the Science Bowl competition.
+    PRESERVE THE IDEAS OF THE QUESTION! ONLY CHANGE THE ANSWER OR SLIGHT PHRASING IF THERE ARE ERRORS!
+    
+    ONLY CHANGE THE ANSWER OR SLIGHT PHRASING IF THERE ARE ERRORS!
+
+    ONLY CHANGE THE ANSWER OR SLIGHT PHRASING IF THERE ARE ERRORS!
+
+    Even if you are changing the question, keep the same idea and topic, just modify the phrasing or answer!
 
     Ensure that ONLY this context {retrieved_text} is used!!
+
+    The question should be of this {category} and this specific {topic}.
 
     Follow these criteria while verifying the validity and appropriateness of the question:
             - If it is short answer, does the answer require an explanation, an equation, or an open-ended, non-objective question? If so, change the question! No explanations or open-ended answers as answers! Everything in this competition is objective.
@@ -4942,11 +4854,7 @@ def verify_science_bowl_question(temp_category, category, question, difficulty, 
             - Participants will not have access to periodic tables or pages with constants, so does the question require knowledge of constants or specific values like atomic masses?
             - Is the question too easy? Make it more difficult!
 
-    You should simply return a modified version of the question given. Make sure to make necessary changes.
-
-    One super important thing you keep screwing up: especially for physics questions, in short answers, don't ask for explanations or equations. Only ask for numerical answers or one word terms!!!
-
-    The questions should be appropriate for advanced college students. What you're spewing out is middle school level questions. C'mon man!
+    You should simply return either the same question or a modified version of it. Again, your goal is not to modify the question but to fix if there are any errors.
 
     """
 
@@ -5045,14 +4953,22 @@ if st.button("Generate Question"):
         question_instructions = question_style_explanations[question_style]
 
     difficulty = 3
-    print(category)
     retrieved_text = ans[index]
-    print(retrieved_text)
+    print("**Category**")
+    print(category)
+    print("**Topic**")
+    print(topic)
+    print("**Retrieved Text**")
     if category!="Math":
-        location = random.randint(0, len(retrieved_text)-400)
-        retrieved_text = retrieved_text[location:location+400]
+        location = random.randint(0, len(retrieved_text)-500)
+        retrieved_text = retrieved_text[location:location+500]
+    print(retrieved_text)
     raw = generate_science_bowl_question(temp_category, retrieved_text, difficulty, category, topic, question_style, question_example, question_instructions)
-    st.session_state.question_final = verify_science_bowl_question(temp_category, category, raw, difficulty, question_style, question_example, question_instructions)
+    print("**Raw Question**")
+    print(raw)
+    st.session_state.question_final = verify_science_bowl_question(temp_category, category, topic, raw, difficulty, question_style, question_example, question_instructions)
+    print("**Modified Question**")
+    print(st.session_state.question_final)
 
 if st.session_state.question_final:
     bonus_index = 0
